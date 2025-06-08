@@ -12,6 +12,13 @@ public class ConsolaVentana extends LecturaAccion {
     private ConsolaVentana() {
     }
 
+    public static ConsolaVentana getInstance() {
+        if (consolaVentana == null) {
+            consolaVentana = new ConsolaVentana();
+        }
+        return consolaVentana;
+    }
+
     @Override
     public void despliegaMenu() {
         System.out.println("Seleccione la opción");
@@ -34,7 +41,7 @@ public class ConsolaVentana extends LecturaAccion {
     public void procesaOpcion() {
         Ejecutable ejecutable = null;
         if (opcion == 1) {
-            ejecutable = (Ejecutable) Consola.getInstance();
+            ejecutable = Consola.getInstance();
         }
         if (opcion == 2) {
             ejecutable = Ventana.getInstance();

@@ -5,6 +5,7 @@ import org.caredatedoc.caredate.jmjmdoc.negocio.Ejecutable;
 public class Ventana implements Ejecutable {
     public static Ventana ventana;
     private boolean flag;
+
     private Ventana() {
     }
 

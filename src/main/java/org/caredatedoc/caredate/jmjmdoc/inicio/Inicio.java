@@ -6,7 +6,7 @@ public class Inicio {
 
     public static void main(String[] args) {
         System.out.println("INICIO CAREDATE");
-        ConsolaVentana.consolaVentana.run();
+        ConsolaVentana.getInstance().run();
         System.out.println("FINALIZANDO CAREDATE");
     }
 }
