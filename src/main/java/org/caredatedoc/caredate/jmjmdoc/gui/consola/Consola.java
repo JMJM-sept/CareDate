@@ -20,8 +20,9 @@ public class Consola extends LecturaAccion{
     public void despliegaMenu() {
         System.out.println("BIENVENIDO");
         System.out.println("Seleccione una opción");
-        System.out.println("1.- Registro de dirección");
-        System.out.println("2.- Salir");
+        System.out.println("1.- REGISTRO PACIENTE");
+        System.out.println("2.- REGISTRO DIRECCIÓN");
+        System.out.println("3.- SALIR");
     }
 
     @Override
@@ -31,18 +32,31 @@ public class Consola extends LecturaAccion{
 
     @Override
     public int valorMaxMenu() {
-        return 2;
+        return 3;
     }
 
     @Override
     public void procesaOpcion() {
         Ejecutable ejecutable = null;
         System.out.println("Opcion: " + opcion);
-        if(opcion==1)
-        {
-            ejecutable = ListaCatalogos.getInstance( );
+        switch (opcion) {
+            case 1:
+                ejecutable = RegistroPaciente.getInstance();
+                break;
+            case 2:
+                ejecutable = ListaCatalogos.getInstance();
+                break;
+            case 3:
+                System.out.println("Saliendo del sistema...");
+                return;
+            default:
+                System.out.println("Opción inválida.");
+                return;
         }
-        ejecutable.setFlag( true );
-        ejecutable.run( );
+
+        if (ejecutable != null) {
+            ejecutable.setFlag(true);
+            ejecutable.run();
         }
     }
+}
