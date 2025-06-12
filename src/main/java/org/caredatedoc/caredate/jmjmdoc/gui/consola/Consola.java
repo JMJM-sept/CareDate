@@ -20,7 +20,7 @@ public class Consola extends LecturaAccion{
     public void despliegaMenu() {
         System.out.println("BIENVENIDO");
         System.out.println("Seleccione una opción");
-        System.out.println("1.- Catálogos");
+        System.out.println("1.- Registro de dirección");
         System.out.println("2.- Salir");
     }
 
@@ -36,10 +36,13 @@ public class Consola extends LecturaAccion{
 
     @Override
     public void procesaOpcion() {
-        PENDIENTE
+        Ejecutable ejecutable = null;
+        System.out.println("Opcion: " + opcion);
+        if(opcion==1)
+        {
+            ejecutable = ListaCatalogos.getInstance( );
+        }
+        ejecutable.setFlag( true );
+        ejecutable.run( );
         }
     }
-
-
-
-}
