@@ -20,6 +20,7 @@ public class    ListaCatalogos extends LecturaAccion {
     public void despliegaMenu() {
         System.out.println("Seleccione una opción");
         System.out.println("1.-Direccón Paciente");
+        System.out.println("2.-Dirección Clinica");
         System.out.println("2.-Salir");
 
     }
@@ -31,7 +32,7 @@ public class    ListaCatalogos extends LecturaAccion {
 
     @Override
     public int valorMaxMenu() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -40,7 +41,10 @@ public class    ListaCatalogos extends LecturaAccion {
 
         switch (opcion) {
             case 1:
-                ejecutable = DireccionCatalogo  .getInstance();
+                ejecutable = DireccionCatalogo.getInstance();
+                break;
+            case 2:
+                ejecutable = DireccionClinicaCatalogo.getInstance();
                 break;
         }
         ejecutable.setFlag(true);

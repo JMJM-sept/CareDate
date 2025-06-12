@@ -39,6 +39,7 @@ public class Consola extends LecturaAccion{
     public void procesaOpcion() {
         Ejecutable ejecutable = null;
         System.out.println("Opcion: " + opcion);
+
         switch (opcion) {
             case 1:
                 ejecutable = RegistroPaciente.getInstance();
