@@ -10,13 +10,26 @@ import java.sql.Statement;
 import java.util.List;
 
 public class PacienteJdbcImpl extends Conexion<Paciente> implements PacienteJdbc{
+    private static PacienteJdbcImpl pacienteJdbc;
+
+    private PacienteJdbcImpl() {
+        super();
+    }
+
+    public static PacienteJdbcImpl getInstance() {
+        if (pacienteJdbc == null) {
+            pacienteJdbc = new PacienteJdbcImpl();
+        }
+        return pacienteJdbc;
+    }
+
     @Override
-    public List<Paciente> findAll() {
+    public List<Direccion> findAll() {
         Statement statement = null;
         ResultSet resultSet = null;
         List<Paciente> list = null;
         Paciente paciente = null;
-        String sql ="Select * from direccion";
+        String sql ="SELECT * FROM paciente";
 
 
         try
@@ -37,13 +50,13 @@ public class PacienteJdbcImpl extends Conexion<Paciente> implements PacienteJdbc
             {
                 paciente = new Paciente();
                 paciente.setId( resultSet.getInt( "ID" ) );
-                paciente.setNombre(resultSet.getString("ALCALDÍA"));
-                paciente.setaPaterno(resultSet.getString("COLONIA"));
-                paciente.setaMaterno(resultSet.getString("CALLE"));
-                paciente.setCurp(resultSet.getString("NUMERO"));
-                paciente.setFechaNac(resultSet.getString("CP"));
+                paciente.setNombre(resultSet.getString("NOMBRE"));
+                paciente.setaPaterno(resultSet.getString("APATERNO"));
+                paciente.setaMaterno(resultSet.getString("AMATERNO"));
+                paciente.setCurp(resultSet.getString("CURP"));
+                paciente.setFechaNac(resultSet.getString("FECHANAC"));
                 paciente.setSexo(resultSet.getString("SEXO").charAt(0));
-                paciente.setEmail(resultSet.getString("CP"));
+                paciente.setEmail(resultSet.getString("EMAILPACIENTE"));
 
                 list.add( paciente );
             }
@@ -95,7 +108,7 @@ public class PacienteJdbcImpl extends Conexion<Paciente> implements PacienteJdbc
         Statement statement = null;
         ResultSet resultSet = null;
         Paciente paciente = null;
-        String sql ="Select * from direccion where ID = %d";
+        String sql ="SELECT * FROM direccion WHERE ID = %d";
         try
         {
             if( !openConnection() )
@@ -115,13 +128,13 @@ public class PacienteJdbcImpl extends Conexion<Paciente> implements PacienteJdbc
             {
                 paciente = new Paciente();
                 paciente.setId( resultSet.getInt( "ID" ) );
-                paciente.setNombre( resultSet.getString( "ALCALDIA" ) );
-                paciente.setaPaterno( resultSet.getString( "COLONIA" ) );
-                paciente.setaMaterno( resultSet.getString( "CALLE" ) );
-                paciente.setCurp( resultSet.getString( "NUMERO" ) );
-                paciente.setFechaNac( resultSet.getString( "CP" ) );
+                paciente.setNombre( resultSet.getString( "NOMBRE" ) );
+                paciente.setaPaterno( resultSet.getString( "APATERNO" ) );
+                paciente.setaMaterno( resultSet.getString( "AMATERNO" ) );
+                paciente.setCurp( resultSet.getString( "CURP" ) );
+                paciente.setFechaNac( resultSet.getString( "FECHANAC" ) );
                 paciente.setSexo(resultSet.getString("SEXO").charAt(0));
-                paciente.setEmail( resultSet.getString( "CP" ) );
+                paciente.setEmail( resultSet.getString( "EMAILPACIENTE" ) );
 
             }
             resultSet.close( );

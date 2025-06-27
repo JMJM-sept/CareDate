@@ -1,8 +1,11 @@
 package org.caredatedoc.caredate.jmjmdoc.jdbc.impl;
 
+import org.caredatedoc.caredate.jmjmdoc.model.Direccion;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 public abstract class Conexion<T> {
     public static String user = "root";
@@ -72,4 +75,5 @@ public abstract class Conexion<T> {
         }
     }
 
+    public abstract List<Direccion> findAll();
 }

@@ -44,7 +44,7 @@ public class    ListaCatalogos extends LecturaAccion {
                 System.out.println("no impl");
                 break;
             case 2:
-                ejecutable = DireccionClinicaCatalogo.getInstance();
+                System.out.println("por impl");
                 break;
         }
         ejecutable.setFlag(true);

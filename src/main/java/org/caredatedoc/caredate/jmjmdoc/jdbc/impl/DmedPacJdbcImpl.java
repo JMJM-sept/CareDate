@@ -1,6 +1,7 @@
 package org.caredatedoc.caredate.jmjmdoc.jdbc.impl;
 
 import org.caredatedoc.caredate.jmjmdoc.model.DatosMedPac;
+import org.caredatedoc.caredate.jmjmdoc.model.Direccion;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,12 +25,12 @@ public class DmedPacJdbcImpl extends Conexion<DatosMedPac> implements DmedPacJdb
     }
 
     @Override
-    public List<DatosMedPac> findAll() {
+    public List<Direccion> findAll() {
         Statement statement = null;
         ResultSet resultSet = null;
         List<DatosMedPac> list = null;
         DatosMedPac datosMedPac = null;
-        String sql ="Select * from TBL_ARTISTA";
+        String sql ="SELECT * FROM datosPaciente";
 
         try
         {
@@ -46,11 +47,11 @@ public class DmedPacJdbcImpl extends Conexion<DatosMedPac> implements DmedPacJdb
                 while (resultSet.next()) {
                     datosMedPac = new DatosMedPac();
                     datosMedPac.setId(resultSet.getInt("ID"));
-                    datosMedPac.setAlergias(resultSet.getString("nombre"));
-                    datosMedPac.setMedicamentos(resultSet.getString(""));
-                    datosMedPac.setCirugiasPre(resultSet.getString(""));
-                    datosMedPac.setTipoSangre(resultSet.getString(""));
-                    datosMedPac.setEnfCronicas(resultSet.getString(""));
+                    datosMedPac.setAlergias(resultSet.getString("ALERGIAS"));
+                    datosMedPac.setMedicamentos(resultSet.getString("MEDICAMENTOS"));
+                    datosMedPac.setCirugiasPre(resultSet.getString("CIRUGIASPREVIAS"));
+                    datosMedPac.setTipoSangre(resultSet.getString("TIPOSANGRE"));
+                    datosMedPac.setEnfCronicas(resultSet.getString("ENFERMEDADESCRONICAS"));
                     list.add(datosMedPac);
                 }
                 resultSet.close();
@@ -68,7 +69,17 @@ public class DmedPacJdbcImpl extends Conexion<DatosMedPac> implements DmedPacJdb
     @Override
     public boolean save(DatosMedPac datosMedPac) {
         PreparedStatement preparedStatement = null;
-        String query = "INSERT INTO TBL_ARTISTA (nombre) VALUES (?)";
+        String query = "INSERT INTO datosPaciente (ALERGIAS, MEDICAMENTOS, CIRUGIASPREVIAS, TIPOSANGRE, ENFERMEDADESCRONICAS) VALUES (?, ?, ?, ?, ?)";
+        try {
+            preparedStatement.setString(1,datosMedPac.getAlergias());
+            preparedStatement.setString(2,datosMedPac.getMedicamentos());
+            preparedStatement.setString(3,datosMedPac.getCirugiasPre());
+            preparedStatement.setString(4,datosMedPac.getTipoSangre());
+            preparedStatement.setString(5,datosMedPac.getEnfCronicas());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         int res = 0;
 
         try {
@@ -94,37 +105,32 @@ public class DmedPacJdbcImpl extends Conexion<DatosMedPac> implements DmedPacJdb
 
     @Override
     public boolean update(DatosMedPac datosMedPac) {
-            PreparedStatement preparedStatement = null;
-            String query = "UPDATE TBL_ARTISTA SET nombre = ? WHERE ID = ?";
-            int res = 0;
+        PreparedStatement preparedStatement = null;
+        int res = 0;
 
-            try {
-                if (!openConnection()) {
-                    System.out.println("ERROR DE CONEXIÓN");
-                    return false;
-                }
-                preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, datosMedPac.getAlergias());
-                preparedStatement.setInt(2, datosMedPac.getId());
-                preparedStatement.setString(2, datosMedPac.getMedicamentos());
-                preparedStatement.setString(2, datosMedPac.getCirugiasPre());
-                preparedStatement.setString(2, datosMedPac.getTipoSangre());
-                preparedStatement.setString(2, datosMedPac.getEnfCronicas());
+        String query = "UPDATE datosPaciente SET ALERGIAS = ?, MEDICAMENTOS = ?, CIRUGIASPREVIAS = ?, TIPOSANGRE = ?, ENFERMEDADESCRONICAS = ? WHERE ID = ?";
 
-                res = preparedStatement.executeUpdate();
-                preparedStatement.close();
-                closeConnection();
-                return res == 1;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return false;
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, datosMedPac.getAlergias());
+            preparedStatement.setString(2, datosMedPac.getMedicamentos());
+            preparedStatement.setString(3, datosMedPac.getCirugiasPre());
+            preparedStatement.setString(4, datosMedPac.getTipoSangre());
+            preparedStatement.setString(5, datosMedPac.getEnfCronicas());
+
+
+            res = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return res > 0;
     }
 
     @Override
     public boolean delete(DatosMedPac datosMedPac) {
                 PreparedStatement preparedStatement = null;
-                String query = "DELETE FROM TBL_ARTISTA WHERE ID = ?";
+                String query = "DELETE FROM datosPaciente WHERE ID = ?";
                 int res = 0;
 
                 try {
@@ -154,7 +160,7 @@ public class DmedPacJdbcImpl extends Conexion<DatosMedPac> implements DmedPacJdb
                 Statement statement = null;
                 ResultSet resultSet = null;
                 DatosMedPac datosMedPac = null;
-                String sql ="Select * from TBL_ARTISTA where ID = %d";
+                String sql ="SELECT * FROM datosPaciente WHERE ID = %d";
                 try
                 {
                     if( !openConnection() )
@@ -174,11 +180,11 @@ public class DmedPacJdbcImpl extends Conexion<DatosMedPac> implements DmedPacJdb
                     {
                         datosMedPac = new DatosMedPac();
                         datosMedPac.setId( resultSet.getInt( "ID" ) );
-                        datosMedPac.setAlergias( resultSet.getString( "nombre" ) );
-                        datosMedPac.setMedicamentos( resultSet.getString( "nombre" ) );
-                        datosMedPac.setCirugiasPre( resultSet.getString( "nombre" ) );
-                        datosMedPac.setTipoSangre( resultSet.getString( "nombre" ) );
-                        datosMedPac.setEnfCronicas( resultSet.getString( "nombre" ) );
+                        datosMedPac.setAlergias( resultSet.getString( "ALERGIAS" ) );
+                        datosMedPac.setMedicamentos( resultSet.getString( "MEDICAMENTOS" ) );
+                        datosMedPac.setCirugiasPre( resultSet.getString( "CIRUGIASPREVIAS" ) );
+                        datosMedPac.setTipoSangre( resultSet.getString( "TIPOSANGRE" ) );
+                        datosMedPac.setEnfCronicas( resultSet.getString( "ENFERMEDADESCRONICAS" ) );
 
                     }
                     resultSet.close( );

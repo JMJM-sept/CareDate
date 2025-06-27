@@ -35,7 +35,7 @@ public class DireccionJdbcImpl extends Conexion<Direccion> implements DireccionJ
         ResultSet resultSet = null;
         List<Direccion> list = null;
         Direccion direccion = null;
-        String sql ="Select * from direccion";
+        String sql ="SELECT * FROM direccion";
 
 
         try
@@ -109,7 +109,7 @@ public class DireccionJdbcImpl extends Conexion<Direccion> implements DireccionJ
         Statement statement = null;
         ResultSet resultSet = null;
         Direccion direccion = null;
-        String sql ="Select * from direccion where ID = %d";
+        String sql ="SELECT * FROM direccion WHERE   ID = %d";
         try
         {
             if( !openConnection() )
