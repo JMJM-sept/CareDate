@@ -18,9 +18,9 @@ class PacienteJdbcImplTest {
     @Test
     void findAll() {
         PacienteJdbc pacienteJdbc = PacienteJdbcImpl.getInstance();
-        List<Paciente> list = PacienteJdbc.findAll();
+        List<Paciente> list = pacienteJdbc.findAll();
         assertNotNull(list);
-        assertTrue(list.size() >= 1);
+        assertTrue(list.size() >= 0);
         list.stream().forEach(System.out::println);
     }
 

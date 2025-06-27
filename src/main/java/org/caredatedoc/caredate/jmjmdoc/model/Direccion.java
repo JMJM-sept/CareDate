@@ -2,7 +2,7 @@ package org.caredatedoc.caredate.jmjmdoc.model;
 
 public class Direccion extends Catalogo {
 
-    private String alcaldíaP;
+    private String alcaldiaP;
     private String coloniaP;
     private String calleP;
     private int numeroP;
@@ -15,12 +15,12 @@ public class Direccion extends Catalogo {
 
     }
 
-    public String getAlcaldíaP() {
-        return alcaldíaP;
+    public String getAlcaldiaP() {
+        return alcaldiaP;
     }
 
-    public void setAlcaldíaP(String alcaldíaP) {
-        this.alcaldíaP = alcaldíaP;
+    public void setAlcaldiaP(String alcaldiaP) {
+        this.alcaldiaP = alcaldiaP;
     }
 
     public String getColoniaP() {
@@ -58,7 +58,7 @@ public class Direccion extends Catalogo {
     @Override
     public String toString() {
         return "Direccion{" +
-                "alcaldíaP='" + alcaldíaP + '\'' +
+                "alcaldíaP='" + alcaldiaP + '\'' +
                 ", coloniaP='" + coloniaP + '\'' +
                 ", calleP='" + calleP + '\'' +
                 ", numeroP=" + numeroP +

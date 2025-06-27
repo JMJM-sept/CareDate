@@ -25,7 +25,7 @@ public class DmedPacJdbcImpl extends Conexion<DatosMedPac> implements DmedPacJdb
     }
 
     @Override
-    public List<Direccion> findAll() {
+    public List<DatosMedPac> findAll() {
         Statement statement = null;
         ResultSet resultSet = null;
         List<DatosMedPac> list = null;

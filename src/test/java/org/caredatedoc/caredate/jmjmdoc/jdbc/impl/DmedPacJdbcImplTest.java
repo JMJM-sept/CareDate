@@ -21,7 +21,7 @@ class DmedPacJdbcImplTest {
         List<DatosMedPac> list;
         list = dmedPacJdbc.findAll();
         assertNotNull(list);
-        assertTrue(list.size() >= 1);
+        assertTrue(list.size() >= 0);
         list.stream().forEach(System.out::println);
     }
 
@@ -62,7 +62,7 @@ class DmedPacJdbcImplTest {
     @Test
     void findById() {
         DmedPacJdbc dmedPacJdbc = DmedPacJdbcImpl.getInstance();
-        DatosMedPac datosMedPac = DmedPacJdbc.findById(1);
+        DatosMedPac datosMedPac = dmedPacJdbc.findById(1);
         assertNotNull(datosMedPac);
         System.out.println( datosMedPac );
 

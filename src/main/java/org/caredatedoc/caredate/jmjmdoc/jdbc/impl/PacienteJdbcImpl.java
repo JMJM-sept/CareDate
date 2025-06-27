@@ -24,7 +24,7 @@ public class PacienteJdbcImpl extends Conexion<Paciente> implements PacienteJdbc
     }
 
     @Override
-    public List<Direccion> findAll() {
+    public List<Paciente> findAll() {
         Statement statement = null;
         ResultSet resultSet = null;
         List<Paciente> list = null;

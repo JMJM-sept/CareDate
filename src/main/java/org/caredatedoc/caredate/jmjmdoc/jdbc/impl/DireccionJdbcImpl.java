@@ -11,7 +11,7 @@ import java.util.List;
 public class DireccionJdbcImpl extends Conexion<Direccion> implements DireccionJdbc {
 
     private static DireccionJdbcImpl direccionJdbc;
-    private String query;
+
 
     private DireccionJdbcImpl( )
     {
@@ -29,46 +29,39 @@ public class DireccionJdbcImpl extends Conexion<Direccion> implements DireccionJ
     }
 
     @Override
-    public List<Direccion> findAll()
-    {
+    public List<Direccion> findAll() {
         Statement statement = null;
         ResultSet resultSet = null;
         List<Direccion> list = null;
         Direccion direccion = null;
-        String sql ="SELECT * FROM direccion";
+        String sql = "SELECT * FROM direccion";
 
-
-        try
-        {
-            if( !openConnection() )
-            {
+        try {
+            if (!openConnection()) {
                 System.out.println("ERROR");
                 return null;
+            } else {
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(sql);
+                if (resultSet == null) {
+                    return null;
+                }
+                list = new java.util.ArrayList<Direccion>();
+                while (resultSet.next()) {
+                    direccion = new Direccion();
+                    direccion.setId(resultSet.getInt("ID"));
+                    direccion.setAlcaldiaP(resultSet.getString("ALCALDIA"));
+                    direccion.setColoniaP(resultSet.getString("COLONIA"));
+                    direccion.setCalleP(resultSet.getString("CALLE"));
+                    direccion.setNumeroP(resultSet.getInt("NUMERO"));
+                    direccion.setCpP(resultSet.getInt("CP"));
+                    list.add(direccion);
+                }
+                resultSet.close();
+                closeConnection();
+                return list;
             }
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery( sql );
-            if( resultSet == null )
-            {
-                return null;
-            }
-            list =  new java.util.ArrayList<Direccion>( );
-            while( resultSet.next( ) )
-            {
-                direccion = new Direccion();
-                direccion.setId( resultSet.getInt( "ID" ) );
-                direccion.setAlcaldíaP(resultSet.getString("ALCALDÍA"));
-                direccion.setColoniaP(resultSet.getString("COLONIA"));
-                direccion.setCalleP(resultSet.getString("CALLE"));
-                direccion.setNumeroP(resultSet.getInt("NUMERO"));
-                direccion.setCpP(resultSet.getInt("CP"));
-                list.add( direccion );
-            }
-            resultSet.close( );
-            closeConnection( );
-            return list;
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             return null;
         }
     }
@@ -77,8 +70,8 @@ public class DireccionJdbcImpl extends Conexion<Direccion> implements DireccionJ
     public boolean save(Direccion direccion) {
         PreparedStatement preparedStatement = null;
         String query = "INSERT INTO direccion (ALCALDIA, COLONIA, CALLE, NUMERO, CP) VALUES (?, ?, ?, ?, ?)";
-        try {
-            preparedStatement.setString(1,direccion.getAlcaldíaP());
+        /*try {
+            preparedStatement.setString(1,direccion.getAlcaldiaP());
             preparedStatement.setString(2,direccion.getColoniaP());
             preparedStatement.setString(3,direccion.getCalleP());
             preparedStatement.setInt(4,direccion.getNumeroP());
@@ -86,14 +79,21 @@ public class DireccionJdbcImpl extends Conexion<Direccion> implements DireccionJ
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+        }*/
         int res = 0;
+
         try {
             if (!openConnection()) {
                 System.out.println("ERROR DE CONEXIÓN");
                 return false;
             }
             preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, direccion.getAlcaldiaP());
+            preparedStatement.setString(2, direccion.getColoniaP());
+            preparedStatement.setString(3, direccion.getCalleP());
+            preparedStatement.setInt(4,direccion.getNumeroP());
+            preparedStatement.setInt(5, direccion.getCpP());
+
             res = preparedStatement.executeUpdate();
             preparedStatement.close();
             closeConnection();
@@ -128,8 +128,8 @@ public class DireccionJdbcImpl extends Conexion<Direccion> implements DireccionJ
             while( resultSet.next( ) )
             {
                 direccion = new Direccion();
-                direccion.setId( resultSet.getInt( "ID" ) );
-                direccion.setAlcaldíaP( resultSet.getString( "ALCALDIA" ) );
+                direccion.setId( resultSet.getInt( "IDDIRECCION" ) );
+                direccion.setAlcaldiaP( resultSet.getString( "ALCALDIA" ) );
                 direccion.setColoniaP( resultSet.getString( "COLONIA" ) );
                 direccion.setCalleP( resultSet.getString( "CALLE" ) );
                 direccion.setNumeroP( resultSet.getInt( "NUMERO" ) );
