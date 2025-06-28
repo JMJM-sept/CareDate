@@ -91,9 +91,12 @@ public class RegistroPaciente implements Ejecutable {
             }
 
             // Crear el paciente
-            Paciente paciente = new Paciente();
+            Paciente paciente = new Paciente(nombre, aPaterno, aMaterno, curp, fechaNac, email, sexo);
 
             System.out.println("\n~~~~~ REGISTRO EXITOSO ~~~~~");
+            /*
+            Direccion direccion = new Direccion(alcaldiaP, coloniaP, calleP, numeroP, cpP);
+             */
 
         } catch (IllegalArgumentException e) {
             System.err.println("Error de validación: " + e.getMessage());
@@ -102,4 +105,5 @@ public class RegistroPaciente implements Ejecutable {
         }
 
     }
+
 }

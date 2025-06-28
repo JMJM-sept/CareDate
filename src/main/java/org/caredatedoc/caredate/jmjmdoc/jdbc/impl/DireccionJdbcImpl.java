@@ -11,6 +11,7 @@ import java.util.List;
 public class DireccionJdbcImpl extends Conexion<Direccion> implements DireccionJdbc {
 
     private static DireccionJdbcImpl direccionJdbc;
+    private String query;
 
 
     private DireccionJdbcImpl( )

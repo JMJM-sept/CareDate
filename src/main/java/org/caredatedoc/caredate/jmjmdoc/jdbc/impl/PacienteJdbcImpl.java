@@ -74,7 +74,7 @@ public class PacienteJdbcImpl extends Conexion<Paciente> implements PacienteJdbc
     public boolean save(Paciente paciente) {
         PreparedStatement preparedStatement = null;
         String query = "INSERT INTO direccion (NOMBRE, APATERNO, AMATERNO, CURP, FECHANAC, SEXO, EMAILPACIENTE) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try {
+        /*try {
             preparedStatement.setString(1,paciente.getNombre());
             preparedStatement.setString(2,paciente.getaPaterno());
             preparedStatement.setString(3,paciente.getaMaterno());
@@ -85,7 +85,7 @@ public class PacienteJdbcImpl extends Conexion<Paciente> implements PacienteJdbc
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+        }*/
         int res = 0;
         try {
             if (!openConnection()) {
@@ -127,7 +127,7 @@ public class PacienteJdbcImpl extends Conexion<Paciente> implements PacienteJdbc
             while( resultSet.next( ) )
             {
                 paciente = new Paciente();
-                paciente.setId( resultSet.getInt( "ID" ) );
+                paciente.setId( resultSet.getInt( "IDPACIENTE" ) );
                 paciente.setNombre( resultSet.getString( "NOMBRE" ) );
                 paciente.setaPaterno( resultSet.getString( "APATERNO" ) );
                 paciente.setaMaterno( resultSet.getString( "AMATERNO" ) );

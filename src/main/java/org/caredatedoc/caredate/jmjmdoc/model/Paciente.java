@@ -19,6 +19,9 @@ public class Paciente extends Catalogo  {
         this.setEmail(email);
     }
 
+    public Paciente(String nombre, String aPaterno, String aMaterno, String curp, String fechaNac, String email, char sexo) {
+    }
+
     public String getNombre() {
         return nombre;
     }
