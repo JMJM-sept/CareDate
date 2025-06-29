@@ -22,6 +22,7 @@ public class ModuloCitasGui extends JFrame {
         JButton agendarBtn = new JButton("Agendar Cita");
         JButton consultarBtn = new JButton("Consultar Citas");
         JButton eliminarBtn = new JButton("Eliminar Cita");
+        JButton editarBtn = new JButton("Eidtar datos médicos");
 
         panelBotones.add(agendarBtn);
         panelBotones.add(consultarBtn);
@@ -32,20 +33,30 @@ public class ModuloCitasGui extends JFrame {
         // Acción para agendar
         agendarBtn.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> {
-                AgendarCitaGui agendarCitaGui = new AgendarCitaGui(); // Asegúrate que esta clase exista
+                AgendarCitaGui agendarCitaGui = new AgendarCitaGui(clinicaSeleccionada);
                 agendarCitaGui.setVisible(true);
             });
         });
 
         // Acción para consultar
-        consultarBtn.addActionListener(e ->
-                JOptionPane.showMessageDialog(ModuloCitasGui.this, "Consultar citas para " + clinicaSeleccionada)
-        );
+        agendarBtn.addActionListener(e -> {
+            SwingUtilities.invokeLater(() -> {
+                ConsultarCitasGui consultarCitasGui = new ConsultarCitasGui(clinicaSeleccionada);
+                consultarCitasGui.setVisible(true);
+            });
+        });
 
         // Acción para eliminar
-        eliminarBtn.addActionListener(e ->
-                JOptionPane.showMessageDialog(ModuloCitasGui.this, "Eliminar cita para " + clinicaSeleccionada)
-        );
+        eliminarBtn.addActionListener(e -> {
+            SwingUtilities.invokeLater(() -> {
+                EliminarCitasGui eliminarCitasGui = new EliminarCitasGui(clinicaSeleccionada);
+                eliminarCitasGui.setVisible(true);
+            });
+        });
+
+        // Acción para editar datos médicos
+        editarBtn.addActionListener(e ->
+                JOptionPane.showMessageDialog(ModuloCitasGui.this, "Editar datos médicos " + clinicaSeleccionada));
     }
 }
 

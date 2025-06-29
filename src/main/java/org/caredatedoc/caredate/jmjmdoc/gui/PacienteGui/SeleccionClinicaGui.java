@@ -7,7 +7,8 @@ import java.util.List;
 
 public class SeleccionClinicaGui extends JFrame
 {
-    public static String seleccionarClinica() {
+
+    public String seleccionarClinica() {
         List<String> clinicas = Arrays.asList(
                 "1. Av. Instituto Politécnico Nacional 123, Lindavista, Gustavo A. Madero",
                 "2. Calzada de los Gallos 55, San Álvaro, Azcapotzalco",
@@ -43,14 +44,13 @@ public class SeleccionClinicaGui extends JFrame
 
         if (seleccion != null) {
             JOptionPane.showMessageDialog(null, "Clínica seleccionada: " + seleccion);
+            SwingUtilities.invokeLater(() -> {
+                ModuloCitasGui moduloCitas = new ModuloCitasGui(seleccion);
+                moduloCitas.setVisible(true);
+            });
         }
 
         return seleccion;
-
     }
-
-
-
-
 
 }

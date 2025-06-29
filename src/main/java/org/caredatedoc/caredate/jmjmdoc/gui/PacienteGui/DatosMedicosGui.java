@@ -55,11 +55,12 @@ public class DatosMedicosGui extends JFrame {
             dispose(); // Cerrar ventana actual
 
             // Abrir selección de clínicas
-            String seleccionarClinica = SeleccionClinicaGui.seleccionarClinica();
+            SeleccionClinicaGui seleccionGui = new SeleccionClinicaGui();
+            String clinicaSeleccionada = seleccionGui.seleccionarClinica();
 
-            if (seleccionarClinica != null) {
-                JOptionPane.showMessageDialog(null, "Clínica seleccionada: " + seleccionarClinica);
-                // Aquí puedes agregar código para continuar flujo con la clínica seleccionada
+            if (clinicaSeleccionada != null) {
+                JOptionPane.showMessageDialog(null, "Clínica seleccionada: " + clinicaSeleccionada);
+                // Aquí continúa el flujo con la clínica seleccionada
             }
         });
     }

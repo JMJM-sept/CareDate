@@ -55,7 +55,7 @@ public class ClinicasCatalogo implements Ejecutable {
             System.out.println(clinica);
         }
 
-        System.out.println("MENÚ DE PACEINTE");
+        System.out.println("MENÚ DE PACIENTE");
         System.out.println("1. Agendar cita");
         System.out.println("2. Cancelar cita");
         System.out.println("3. Consultar historial de citas");
@@ -69,6 +69,7 @@ public class ClinicasCatalogo implements Ejecutable {
         switch (opcion) {
             case 1:
                 System.out.println("Has elegido: Agendar cita");
+
                 break;
             case 2:
                 System.out.println("Has elegido: Cancelar cita");
